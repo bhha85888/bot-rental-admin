@@ -11,35 +11,36 @@ supabase: Client = create_client(URL, KEY)
 st.set_page_config(page_title="Bot Rental Admin", layout="wide")
 
 def add_bg_from_url():
-    # ฉีด CSS เข้าไปในระดับ Global
     st.markdown(
         """
         <style>
-        /* บังคับทุกอย่างให้โปร่งใสยกเว้นกล่องข้อมูล */
-        .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"] {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+        /* แผน Z: บังคับยันระดับราก (HTML/Body) */
+        html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"] {
+            background: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg") no-repeat center center fixed !important;
+            background-size: cover !important;
         }
 
-        /* สร้างกรอบให้ตัวเนื้อหาดูเด่นและอ่านง่ายขึ้น */
-        .block-container {
-            background-color: rgba(255, 255, 255, 0.6) !important;
-            backdrop-filter: blur(10px) !important;
-            border-radius: 20px !important;
+        /* บังคับส่วนเนื้อหาให้ลอยเด่น (Glassmorphism) */
+        .main .block-container {
+            background: rgba(255, 255, 255, 0.85) !important;
+            border-radius: 25px !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
+            padding: 3rem !important;
             margin-top: 2rem !important;
-            padding: 2rem !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+            margin-bottom: 2rem !important;
         }
 
-        /* ปรับสีตัวหนังสือหัวข้อให้เข้มชัดเจน */
-        h1, h2, h3, p {
-            color: #1e293b !important;
+        /* ปรับ Font ให้เข้มขึ้นเพื่อความอ่านง่าย */
+        h1, h2, h3, p, span, label {
+            color: #1a202c !important;
+            font-family: 'Kanit', sans-serif !important;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-# เรียกใช้งานฟังก์ชันที่ด้านบนสุดของโค้ด
+# เรียกใช้ฟังก์ชันไว้บรรทัดแรกหลังคำสั่ง import
 add_bg_from_url()
     
 st.title("🤖 Bot Rental Management System")
