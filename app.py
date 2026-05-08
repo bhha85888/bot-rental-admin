@@ -14,37 +14,40 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. สั่งระเบิดพื้นหลังสีขาวทุกชั้นที่ Streamlit มี */
-        #root, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"] {
-            background: none !important;
+        /* 1. สั่งทุกอย่างให้โปร่งใสยันระดับโครงกระดูกแอป */
+        [data-testid="stAppViewContainer"], 
+        [data-testid="stMain"], 
+        [data-testid="stHeader"],
+        .stApp,
+        #root {
+            background: transparent !important;
             background-color: transparent !important;
         }
 
-        /* 2. สร้างพื้นหลังใหม่ไปแปะที่ HTML ชั้นนอกสุด (ด่านสุดท้าย) */
+        /* 2. บังคับยัดรูปเข้าไปที่ตัวครอบจักรวาล (HTML) */
         html {
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
                         url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") no-repeat center center fixed !important;
             background-size: cover !important;
         }
 
-        /* 3. จัดการเรื่องตัวหนังสือซ้อนและไอคอนที่เบี้ยว */
-        .st-emotion-cache-1h9usn2 p { display: inline !important; }
-        div[data-testid="stExpander"] div[role="button"] p { color: #000 !important; }
-
-        /* 4. กล่องขาวครอบเนื้อหา (ปรับให้ขุ่นเหมือนกระจก) */
-        .block-container {
-            background: rgba(255, 255, 255, 0.95) !important;
+        /* 3. กล่องข้อมูลขาว (Glassmorphism) */
+        .main .block-container {
+            background-color: rgba(255, 255, 255, 0.95) !important;
             border-radius: 20px !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
             margin-top: 50px !important;
             padding: 3rem !important;
         }
 
-        /* 5. ปรับสีหัวข้อใหญ่ให้ขาวชัดเจน */
-        h1 {
-            color: white !important;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.8) !important;
+        /* 4. ปรับหัวข้อให้เด่นชัด */
+        h1, h2, h3 {
+            color: #ffffff !important;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8) !important;
         }
+        
+        /* 5. แก้ปัญหาไอคอน arrow_drop_down ซ้อน */
+        [data-testid="stExpander"] svg { display: none !important; }
         </style>
         """,
         unsafe_allow_html=True
