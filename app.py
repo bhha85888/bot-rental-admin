@@ -14,34 +14,54 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* แผน Z: บังคับยันระดับราก (HTML/Body) */
-        html, body, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"] {
-            background: url("https://images.pexels.com/photos/255379/pexels-photo-255379.jpeg") no-repeat center center fixed !important;
+        /* 1. ใส่ภาพพื้นหลังกราฟแท่งเทียน (Candlestick Chart) */
+        .stApp {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                              url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop");
             background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
         }
 
-        /* บังคับส่วนเนื้อหาให้ลอยเด่น (Glassmorphism) */
+        /* 2. แก้ปัญหาตัวหนังสือซ้อนกัน: คืนค่าให้ไอคอนและข้อความใน Expander */
+        [data-testid="stExpander"] p, [data-testid="stExpander"] span {
+            display: inline-block !important;
+            vertical-align: middle !important;
+        }
+        
+        /* ซ่อนข้อความรหัสไอคอนที่ชอบโผล่มาเกิน */
+        .st-emotion-cache-1h9usn2, .aria-hidden {
+            display: none !important;
+        }
+
+        /* 3. ปรับกล่องเนื้อหาให้ดูแพง (Glassmorphism Dark Mode) */
         .main .block-container {
-            background: rgba(255, 255, 255, 0.85) !important;
-            border-radius: 25px !important;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2) !important;
-            padding: 3rem !important;
-            margin-top: 2rem !important;
-            margin-bottom: 2rem !important;
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 20px !important;
+            padding: 2.5rem !important;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
+            margin-top: 20px;
         }
 
-        /* ปรับ Font ให้เข้มขึ้นเพื่อความอ่านง่าย */
-        h1, h2, h3, p, span, label {
-            color: #1a202c !important;
-            font-family: 'Kanit', sans-serif !important;
+        /* 4. ตกแต่งหัวข้อให้เด่นชัด */
+        h1, h2, h3 {
+            color: #0e1117 !important;
+            font-weight: 700 !important;
+            text-shadow: none !important;
+        }
+
+        /* 5. ปรับแต่งปุ่มและฟอร์ม */
+        .stButton>button {
+            width: 100%;
+            border-radius: 10px;
+            background-color: #00c805 !important; /* สีเขียวแบบ Trading */
+            color: white !important;
+            border: none;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
-
-# เรียกใช้ฟังก์ชันไว้บรรทัดแรกหลังคำสั่ง import
-add_bg_from_url()
     
 st.title("🤖 Bot Rental Management System")
 
