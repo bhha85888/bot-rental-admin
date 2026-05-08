@@ -11,36 +11,36 @@ supabase: Client = create_client(URL, KEY)
 st.set_page_config(page_title="Bot Rental Admin", layout="wide")
 
 def add_bg_from_url():
+    # ฉีด CSS เข้าไปในระดับ Global
     st.markdown(
         """
         <style>
-        /* 1. บังคับพื้นหลังไล่สีแบบทันสมัย (ไม่ต้องใช้ URL รูปภาพ) */
-        .stApp {
+        /* บังคับทุกอย่างให้โปร่งใสยกเว้นกล่องข้อมูล */
+        .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"] {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
-            background-attachment: fixed !important;
         }
 
-        /* 2. ทำให้กล่อง Content ดูลอยเด่นขึ้นมา (Glassmorphism light) */
-        [data-testid="stAppViewContainer"] {
-            background: transparent !important;
-        }
-        
-        [data-testid="stHeader"] {
-            background: rgba(255, 255, 255, 0.1) !important;
-            backdrop-filter: blur(10px);
+        /* สร้างกรอบให้ตัวเนื้อหาดูเด่นและอ่านง่ายขึ้น */
+        .block-container {
+            background-color: rgba(255, 255, 255, 0.6) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 20px !important;
+            margin-top: 2rem !important;
+            padding: 2rem !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
         }
 
-        /* 3. ปรับแต่งกล่อง Expander และกล่องข้อมูลให้อ่านง่าย */
-        div[data-testid="stExpander"], div[data-testid="stForm"] {
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            border-radius: 15px !important;
-            border: 1px solid rgba(0,0,0,0.05) !important;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
+        /* ปรับสีตัวหนังสือหัวข้อให้เข้มชัดเจน */
+        h1, h2, h3, p {
+            color: #1e293b !important;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
+
+# เรียกใช้งานฟังก์ชันที่ด้านบนสุดของโค้ด
+add_bg_from_url()
     
 st.title("🤖 Bot Rental Management System")
 
