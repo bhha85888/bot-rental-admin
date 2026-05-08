@@ -14,40 +14,40 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. บังคับแบล็คกราวด์ทุกชั้น (ใส่ทั้งรูปและสีสำรอง) */
-        .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+        /* 1. เจาะจงที่ตัวคอนเทนเนอร์หลัก (ตัวนี้แหละที่ชอบเปลี่ยนเป็นสีขาว) */
+        [data-testid="stAppViewContainer"] {
             background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                               url("https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg") !important;
-            background-color: #0e1117 !important; /* สีดำเข้มสำรองเผื่อรูปไม่ขึ้น */
             background-size: cover !important;
             background-position: center !important;
             background-attachment: fixed !important;
         }
 
-        /* 2. บังคับซ่อนไอคอนเจ้าปัญหาที่ทำให้ตัวหนังสือซ้อน */
+        /* 2. สั่งให้ชั้นอื่นๆ ทั้งหมดโปร่งใส ห้ามมีสีขาวมาบัง */
+        [data-testid="stHeader"], [data-testid="stMain"], .stApp {
+            background: transparent !important;
+        }
+
+        /* 3. กล่องเนื้อหาขาว (Glassmorphism) ปรับให้เนียนขึ้น */
+        .block-container {
+            background-color: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 25px !important;
+            padding: 3rem !important;
+            margin-top: 50px !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+        }
+
+        /* 4. จัดการไอคอนและตัวหนังสือซ้อน (arrow_drop_down) อีกครั้งเพื่อความชัวร์ */
         [data-testid="stExpander"] svg {
             display: none !important;
         }
         
-        /* 3. กล่องเนื้อหา (ทำเป็นกระจกฝ้า Glassmorphism) */
-        .main .block-container {
-            background: rgba(255, 255, 255, 0.9) !important;
-            border-radius: 20px !important;
-            padding: 3rem !important;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
-            margin-top: 50px;
-        }
-
-        /* 4. ปรับสี Font ให้เข้ากับแบล็คกราวด์เข้ม */
-        h1, h2, h3 {
-            color: #ffffff !important;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
-            padding-bottom: 20px;
-        }
-        
-        /* แก้สีตัวหนังสือในกล่อง Expander ให้เป็นสีดำเพื่อให้อ่านง่าย */
-        [data-testid="stExpander"] p, [data-testid="stExpander"] label {
-            color: #000000 !important;
+        /* 5. ปรับ Font หัวข้อให้เด่น (เพราะพื้นหลังเราจะมืดลง) */
+        h1#bot-rental-management-system {
+            color: white !important;
+            text-align: center;
+            text-shadow: 2px 2px 10px rgba(0,0,0,1) !important;
+            padding-bottom: 30px;
         }
         </style>
         """,
