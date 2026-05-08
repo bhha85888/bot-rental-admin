@@ -14,46 +14,21 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* นำเข้าฟอนต์ Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Kanit:wght@300;500&display=swap');
-
-        /* ตั้งค่าพื้นหลังและฟอนต์หลัก */
+        /* บังคับชั้นนอกสุด */
         .stApp {
-            background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), 
-                        url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop");
-            background-attachment: fixed;
-            background-size: cover;
-            font-family: 'Inter', 'Kanit', sans-serif;
+            background-color: #e5e5f7 !important; /* ลองใส่สีเทาฟ้าดูก่อน */
+            background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px) !important;
+            background-size: 10px 10px !important;
         }
-
-        /* ปรับแต่งหัวข้อ (Headers) */
-        h1, h2, h3 {
-            font-family: 'Kanit', sans-serif !important;
-            font-weight: 500 !important;
-            color: #1E1E1E;
-        }
-
-        /* ปรับแต่งกล่องฟอร์มและตารางให้ดูทันสมัย */
-        div[data-testid="stForm"], div[data-testid="stExpander"], .stTable {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 15px !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-        }
-
-        /* ปรับแต่งปุ่มให้ดูสวยขึ้น */
-        .stButton>button {
-            border-radius: 8px !important;
-            font-family: 'Kanit', sans-serif;
-            transition: 0.3s;
+        
+        /* สั่งให้ชั้นอื่นๆ โปร่งใสทั้งหมด */
+        [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stMain"] {
+            background: transparent !important;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
-
-add_bg_from_url()
 
 st.title("🤖 Bot Rental Management System")
 
