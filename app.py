@@ -14,24 +14,28 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. ทำลายสีขาวและพื้นหลังของกล่องทุกชั้นที่ Streamlit ชอบสร้างมาบัง */
-        [data-testid="stAppViewContainer"],
-        [data-testid="stMain"],
-        [data-testid="stHeader"],
-        [data-testid="stSidebar"],
-        .main,
-        .block-container {
-            background-color: transparent !important;
-            background: none !important;
+        /* 1. บังคับพื้นหลังไล่สีแบบทันสมัย (ไม่ต้องใช้ URL รูปภาพ) */
+        .stApp {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%) !important;
+            background-attachment: fixed !important;
         }
 
-        /* 2. บังคับยัดรูปภาพเข้าไปที่ชั้นล่างสุดของเว็บไซต์ (.stApp) */
-        .stApp {
-            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
-                              url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") !important;
-            background-size: cover !important;
-            background-position: center !important;
-            background-attachment: fixed !important;
+        /* 2. ทำให้กล่อง Content ดูลอยเด่นขึ้นมา (Glassmorphism light) */
+        [data-testid="stAppViewContainer"] {
+            background: transparent !important;
+        }
+        
+        [data-testid="stHeader"] {
+            background: rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 3. ปรับแต่งกล่อง Expander และกล่องข้อมูลให้อ่านง่าย */
+        div[data-testid="stExpander"], div[data-testid="stForm"] {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 15px !important;
+            border: 1px solid rgba(0,0,0,0.05) !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05) !important;
         }
         </style>
         """,
