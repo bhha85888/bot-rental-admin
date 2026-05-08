@@ -14,28 +14,30 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. สั่งให้แถบด้านบน (Header) โปร่งใส */
-        [data-testid="stHeader"] {
+        /* 1. ทำลายสีขาวและพื้นหลังของกล่องทุกชั้นที่ Streamlit ชอบสร้างมาบัง */
+        [data-testid="stAppViewContainer"],
+        [data-testid="stMain"],
+        [data-testid="stHeader"],
+        [data-testid="stSidebar"],
+        .main,
+        .block-container {
             background-color: transparent !important;
+            background: none !important;
         }
 
-        /* 2. ยิงรูปภาพเข้าที่กล่องแสดงผลชั้นหน้าสุดโดยตรงเลย */
-        [data-testid="stAppViewContainer"] {
+        /* 2. บังคับยัดรูปภาพเข้าไปที่ชั้นล่างสุดของเว็บไซต์ (.stApp) */
+        .stApp {
             background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
                               url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") !important;
             background-size: cover !important;
             background-position: center !important;
             background-attachment: fixed !important;
         }
-        
-        /* 3. ส่วนอื่นๆ ที่อาจจะบังรูปให้โปร่งใส */
-        [data-testid="stMain"] {
-            background-color: transparent !important;
-        }
         </style>
         """,
         unsafe_allow_html=True
     )
+    
 st.title("🤖 Bot Rental Management System")
 
 # --- 2. ส่วนแสดงสถานะปัจจุบัน ---
