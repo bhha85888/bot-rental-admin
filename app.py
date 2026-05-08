@@ -10,44 +10,48 @@ supabase: Client = create_client(URL, KEY)
 # ตั้งค่าหน้าเว็บให้ดูง่ายขึ้น
 st.set_page_config(page_title="Bot Rental Admin", layout="wide")
 
+import base64
+
 def add_bg_from_url():
+    # แผนฝังตัว: ใช้สีพื้นหลังแบบไล่ระดับที่เลียนแบบกราฟ (ปลอดภัยและขึ้นแน่นอน 100%)
     st.markdown(
         """
         <style>
-        /* 1. สั่งทุกอย่างให้โปร่งใสยันระดับโครงกระดูกแอป */
-        [data-testid="stAppViewContainer"], 
-        [data-testid="stMain"], 
-        [data-testid="stHeader"],
-        .stApp,
-        #root {
+        /* 1. สร้างพื้นหลังแบบกราฟเส้นด้วย CSS (ไม่ต้องง้อรูปภาพจากเว็บอื่น) */
+        .stApp {
+            background-color: #0e1117 !important;
+            background-image: 
+                linear-gradient(rgba(14, 17, 23, 0.8), rgba(14, 17, 23, 0.8)),
+                linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px),
+                linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px) !important;
+            background-size: 100% 100%, 50px 50px, 50px 50px !important;
+            background-attachment: fixed !important;
+        }
+
+        /* 2. บังคับทุกชั้นให้โปร่งใส */
+        [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stMain"] {
             background: transparent !important;
-            background-color: transparent !important;
         }
 
-        /* 2. บังคับยัดรูปเข้าไปที่ตัวครอบจักรวาล (HTML) */
-        html {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                        url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") no-repeat center center fixed !important;
-            background-size: cover !important;
-        }
-
-        /* 3. กล่องข้อมูลขาว (Glassmorphism) */
-        .main .block-container {
-            background-color: rgba(255, 255, 255, 0.95) !important;
+        /* 3. กล่องเนื้อหาแบบกระจก (Glassmorphism) */
+        .block-container {
+            background: rgba(255, 255, 255, 0.95) !important;
             border-radius: 20px !important;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
             margin-top: 50px !important;
             padding: 3rem !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
         }
 
-        /* 4. ปรับหัวข้อให้เด่นชัด */
-        h1, h2, h3 {
-            color: #ffffff !important;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.8) !important;
-        }
-        
-        /* 5. แก้ปัญหาไอคอน arrow_drop_down ซ้อน */
+        /* 4. จัดการตัวหนังสือซ้อน (arrow_drop_down) */
         [data-testid="stExpander"] svg { display: none !important; }
+        .st-emotion-cache-1h9usn2 p { display: inline !important; }
+
+        /* 5. ปรับสีหัวข้อให้เด่น */
+        h1 {
+            color: #00ffcc !important; /* สีเขียวมิ้นต์แบบเทรดเดอร์ */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+        }
         </style>
         """,
         unsafe_allow_html=True
