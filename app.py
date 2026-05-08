@@ -14,44 +14,36 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. บังคับพื้นหลังที่ตัว Body ของเว็บไซต์เลย (ลึกที่สุด) */
-        [data-testid="stAppViewContainer"] {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                              url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") !important;
+        /* 1. สั่งระเบิดพื้นหลังสีขาวทุกชั้นที่ Streamlit มี */
+        #root, .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"], [data-testid="stHeader"] {
+            background: none !important;
+            background-color: transparent !important;
+        }
+
+        /* 2. สร้างพื้นหลังใหม่ไปแปะที่ HTML ชั้นนอกสุด (ด่านสุดท้าย) */
+        html {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") no-repeat center center fixed !important;
             background-size: cover !important;
-            background-position: center !important;
-            background-attachment: fixed !important;
         }
 
-        /* 2. สั่งให้เลเยอร์อื่นๆ ทั้งหมดโปร่งใส เพื่อให้เห็นรูปข้างหลัง */
-        .stApp, [data-testid="stHeader"], [data-testid="stMain"] {
-            background: transparent !important;
-        }
+        /* 3. จัดการเรื่องตัวหนังสือซ้อนและไอคอนที่เบี้ยว */
+        .st-emotion-cache-1h9usn2 p { display: inline !important; }
+        div[data-testid="stExpander"] div[role="button"] p { color: #000 !important; }
 
-        /* 3. แก้ปัญหาตัวหนังสือซ้อน (arrow_drop_down) และไอคอนที่เบี้ยว */
-        /* สั่งซ่อนข้อความขยะที่โผล่มาตอนเราแก้ CSS */
-        span[data-testid="stWidgetLabel"] p { display: inline !important; }
-        .aria-hidden { display: none !important; }
-
-        /* 4. ปรับแต่งกล่องสีขาว (Content Box) ให้ดูโปร่งแสงและอ่านง่าย */
-        .main .block-container {
-            background-color: rgba(255, 255, 255, 0.93) !important;
-            border-radius: 25px !important;
+        /* 4. กล่องขาวครอบเนื้อหา (ปรับให้ขุ่นเหมือนกระจก) */
+        .block-container {
+            background: rgba(255, 255, 255, 0.95) !important;
+            border-radius: 20px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
+            margin-top: 50px !important;
             padding: 3rem !important;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
-            margin-top: 40px !important;
         }
 
-        /* 5. ปรับสี Font หัวข้อใหญ่ให้เป็นสีขาว (เพื่อให้เด่นบนพื้นหลังกราฟ) */
-        h1, h2, h3 {
-            color: #ffffff !important;
+        /* 5. ปรับสีหัวข้อใหญ่ให้ขาวชัดเจน */
+        h1 {
+            color: white !important;
             text-shadow: 2px 2px 10px rgba(0,0,0,0.8) !important;
-        }
-
-        /* 6. ส่วนตัวหนังสือในกล่องขาว ให้เป็นสีดำชัดเจน */
-        .block-container p, .block-container span, .block-container label {
-            color: #000000 !important;
-            font-family: 'Kanit', sans-serif !important;
         }
         </style>
         """,
