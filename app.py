@@ -14,49 +14,40 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. ใส่ภาพพื้นหลังกราฟแท่งเทียน (Candlestick Chart) */
-        .stApp {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-                              url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop");
+        /* 1. บังคับแบล็คกราวด์ทุกชั้น (ใส่ทั้งรูปและสีสำรอง) */
+        .stApp, [data-testid="stAppViewContainer"], [data-testid="stMain"] {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                              url("https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg") !important;
+            background-color: #0e1117 !important; /* สีดำเข้มสำรองเผื่อรูปไม่ขึ้น */
             background-size: cover !important;
             background-position: center !important;
             background-attachment: fixed !important;
         }
 
-        /* 2. แก้ปัญหาตัวหนังสือซ้อนกัน: คืนค่าให้ไอคอนและข้อความใน Expander */
-        [data-testid="stExpander"] p, [data-testid="stExpander"] span {
-            display: inline-block !important;
-            vertical-align: middle !important;
-        }
-        
-        /* ซ่อนข้อความรหัสไอคอนที่ชอบโผล่มาเกิน */
-        .st-emotion-cache-1h9usn2, .aria-hidden {
+        /* 2. บังคับซ่อนไอคอนเจ้าปัญหาที่ทำให้ตัวหนังสือซ้อน */
+        [data-testid="stExpander"] svg {
             display: none !important;
         }
-
-        /* 3. ปรับกล่องเนื้อหาให้ดูแพง (Glassmorphism Dark Mode) */
+        
+        /* 3. กล่องเนื้อหา (ทำเป็นกระจกฝ้า Glassmorphism) */
         .main .block-container {
-            background: rgba(255, 255, 255, 0.95) !important;
+            background: rgba(255, 255, 255, 0.9) !important;
             border-radius: 20px !important;
-            padding: 2.5rem !important;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
-            margin-top: 20px;
+            padding: 3rem !important;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8) !important;
+            margin-top: 50px;
         }
 
-        /* 4. ตกแต่งหัวข้อให้เด่นชัด */
+        /* 4. ปรับสี Font ให้เข้ากับแบล็คกราวด์เข้ม */
         h1, h2, h3 {
-            color: #0e1117 !important;
-            font-weight: 700 !important;
-            text-shadow: none !important;
+            color: #ffffff !important;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5) !important;
+            padding-bottom: 20px;
         }
-
-        /* 5. ปรับแต่งปุ่มและฟอร์ม */
-        .stButton>button {
-            width: 100%;
-            border-radius: 10px;
-            background-color: #00c805 !important; /* สีเขียวแบบ Trading */
-            color: white !important;
-            border: none;
+        
+        /* แก้สีตัวหนังสือในกล่อง Expander ให้เป็นสีดำเพื่อให้อ่านง่าย */
+        [data-testid="stExpander"] p, [data-testid="stExpander"] label {
+            color: #000000 !important;
         }
         </style>
         """,
