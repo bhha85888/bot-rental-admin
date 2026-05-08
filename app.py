@@ -14,22 +14,28 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* บังคับชั้นนอกสุด */
-        .stApp {
-            background-color: #e5e5f7 !important; /* ลองใส่สีเทาฟ้าดูก่อน */
-            background-image: radial-gradient(#444cf7 0.5px, #e5e5f7 0.5px) !important;
-            background-size: 10px 10px !important;
+        /* 1. สั่งให้แถบด้านบน (Header) โปร่งใส */
+        [data-testid="stHeader"] {
+            background-color: transparent !important;
+        }
+
+        /* 2. ยิงรูปภาพเข้าที่กล่องแสดงผลชั้นหน้าสุดโดยตรงเลย */
+        [data-testid="stAppViewContainer"] {
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                              url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-attachment: fixed !important;
         }
         
-        /* สั่งให้ชั้นอื่นๆ โปร่งใสทั้งหมด */
-        [data-testid="stAppViewContainer"], [data-testid="stHeader"], [data-testid="stMain"] {
-            background: transparent !important;
+        /* 3. ส่วนอื่นๆ ที่อาจจะบังรูปให้โปร่งใส */
+        [data-testid="stMain"] {
+            background-color: transparent !important;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
-
 st.title("🤖 Bot Rental Management System")
 
 # --- 2. ส่วนแสดงสถานะปัจจุบัน ---
