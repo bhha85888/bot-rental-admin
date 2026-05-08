@@ -14,40 +14,44 @@ def add_bg_from_url():
     st.markdown(
         """
         <style>
-        /* 1. เจาะจงที่ตัวคอนเทนเนอร์หลัก (ตัวนี้แหละที่ชอบเปลี่ยนเป็นสีขาว) */
+        /* 1. บังคับพื้นหลังที่ตัว Body ของเว็บไซต์เลย (ลึกที่สุด) */
         [data-testid="stAppViewContainer"] {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                              url("https://images.pexels.com/photos/6770610/pexels-photo-6770610.jpeg") !important;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                              url("https://images.unsplash.com/photo-1611974714008-66299006a1b6?q=80&w=1920&auto=format&fit=crop") !important;
             background-size: cover !important;
             background-position: center !important;
             background-attachment: fixed !important;
         }
 
-        /* 2. สั่งให้ชั้นอื่นๆ ทั้งหมดโปร่งใส ห้ามมีสีขาวมาบัง */
-        [data-testid="stHeader"], [data-testid="stMain"], .stApp {
+        /* 2. สั่งให้เลเยอร์อื่นๆ ทั้งหมดโปร่งใส เพื่อให้เห็นรูปข้างหลัง */
+        .stApp, [data-testid="stHeader"], [data-testid="stMain"] {
             background: transparent !important;
         }
 
-        /* 3. กล่องเนื้อหาขาว (Glassmorphism) ปรับให้เนียนขึ้น */
-        .block-container {
-            background-color: rgba(255, 255, 255, 0.95) !important;
+        /* 3. แก้ปัญหาตัวหนังสือซ้อน (arrow_drop_down) และไอคอนที่เบี้ยว */
+        /* สั่งซ่อนข้อความขยะที่โผล่มาตอนเราแก้ CSS */
+        span[data-testid="stWidgetLabel"] p { display: inline !important; }
+        .aria-hidden { display: none !important; }
+
+        /* 4. ปรับแต่งกล่องสีขาว (Content Box) ให้ดูโปร่งแสงและอ่านง่าย */
+        .main .block-container {
+            background-color: rgba(255, 255, 255, 0.93) !important;
             border-radius: 25px !important;
             padding: 3rem !important;
-            margin-top: 50px !important;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5) !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3) !important;
+            margin-top: 40px !important;
         }
 
-        /* 4. จัดการไอคอนและตัวหนังสือซ้อน (arrow_drop_down) อีกครั้งเพื่อความชัวร์ */
-        [data-testid="stExpander"] svg {
-            display: none !important;
+        /* 5. ปรับสี Font หัวข้อใหญ่ให้เป็นสีขาว (เพื่อให้เด่นบนพื้นหลังกราฟ) */
+        h1, h2, h3 {
+            color: #ffffff !important;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.8) !important;
         }
-        
-        /* 5. ปรับ Font หัวข้อให้เด่น (เพราะพื้นหลังเราจะมืดลง) */
-        h1#bot-rental-management-system {
-            color: white !important;
-            text-align: center;
-            text-shadow: 2px 2px 10px rgba(0,0,0,1) !important;
-            padding-bottom: 30px;
+
+        /* 6. ส่วนตัวหนังสือในกล่องขาว ให้เป็นสีดำชัดเจน */
+        .block-container p, .block-container span, .block-container label {
+            color: #000000 !important;
+            font-family: 'Kanit', sans-serif !important;
         }
         </style>
         """,
